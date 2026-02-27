@@ -11,7 +11,7 @@ permissions:
   packages: write
 
 env:
-  IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/nodeapp
+  IMAGE_NAME: ghcr.io/${{ github.repository }}
 
 jobs:
   # ── Job 1 : Build & Tests
@@ -120,4 +120,6 @@ jobs:
           context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          labels: |
+            ${{ steps.meta.outputs.labels }}
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
